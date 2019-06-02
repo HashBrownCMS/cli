@@ -1,7 +1,9 @@
 # HashBrown CMS command-line interface
 
-To run this tool from source, clone this repo and use `node hashbrown-cli.js`
+# Install from NPM
+`npm i -g hashbrown-cli`
 
+# Usage
 ```
 Usage: hashbrown-cli <command> [<args>]
 
