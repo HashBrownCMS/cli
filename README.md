@@ -14,11 +14,23 @@ general
   set       Set a settings value, such as "editor"
   use       Switch between projects and environments
 
+connection
+  edit      Edit a connection
+  ls        List all available connections
+  new       Create a new connection
+  rm        Remove a connection
+
 content
   edit      Edit a content node
   ls        List all available content
   new       Create a new content node
   rm        Remove a content node
+
+form
+  edit      Edit a form
+  ls        List all available forms
+  new       Create a new form
+  rm        Remove a form
 
 schema
   edit      Edit a schema
