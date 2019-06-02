@@ -1,9 +1,9 @@
 # HashBrown CMS command-line interface
 
-# Install from NPM
+## Install from NPM
 `npm i -g hashbrown-cli`
 
-# Usage
+## Usage
 ```
 Usage: hashbrown-cli <command> [<args>]
 
