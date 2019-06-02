@@ -409,6 +409,17 @@ class HashBrown {
     }
 
     /**
+     * Gets the version fo this app
+     */
+    static async version() {
+        let app = await FileHelper.read(Path.join(__dirname, 'package.json'));
+
+        app = JSON.parse(app.toString('utf8'));
+
+        console.log(app.version);
+    }
+
+    /**
      * Handles project requests
      */
     static async project(args) {
@@ -484,23 +495,25 @@ class HashBrown {
         if(!process.argv || process.argv.length < 3) {
             this.help();
             process.exit(0);
+        }
 
-        } else if(typeof this[process.argv[2]] !== 'function') {
-            console.log('Unknown function "' + process.argv[2] + '"');
+        let cmd = process.argv[2].replace('--', '');
+
+        if(typeof this[cmd] !== 'function') {
+            console.log('Unknown command "' + process.argv[2] + '"');
             process.exit(1);
+        }
 
-        } else {
-            try {
-                await this[process.argv[2]](process.argv.slice(3));
+        try {
+            await this[cmd](process.argv.slice(3));
 
-                process.exit(0);
+            process.exit(0);
 
-            } catch(e) {
-                console.log(e.message);
+        } catch(e) {
+            console.log(e.message);
 
-                process.exit(1);
-            
-            }
+            process.exit(1);
+        
         }
     }
 }
