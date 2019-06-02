@@ -156,15 +156,28 @@ async function resourceRequest(method, category, id, data) {
  * Edits a resource
  */
 async function editResource(category, id) {
-    let session = await getSession();
-    let data = await RequestHelper.request('get', session.host + '/api/' + session.project + '/' + session.environment + '/' + category + '/' + id + '?token=' + session.token);
+    if(!id || id.length < 3) { throw new Error('Id should be minimum 3 characters'); }
+
+    let all = await resourceRequest('get', category);
+    let data = null;
+
+    for(let resource of all) {
+        if(resource.id.indexOf(id) === 0) {
+            data = resource;
+            id = data.id;
+            break;
+        }
+    }
+
+    if(!data) {
+        throw new Error(category[0].toUpperCase() + category.slice(1) + ' by id "' + id + '" not found');
+    }
+
     let cachePath = await writeCache(id, data);
     let editorName = await readConfig('settings').editor || process.env.EDITOR || 'vi';
 
     await new Promise((resolve, reject) => {
-        let editor = ChildProcess.spawn(editorName, [ cachePath ], {
-            stdio: 'inherit'
-        });
+        let editor = ChildProcess.spawn(editorName, [ cachePath ], { stdio: 'inherit' });
 
         editor.on('exit', (e, code) => {
             resolve();
@@ -174,7 +187,7 @@ async function editResource(category, id) {
     data = await FileHelper.read(cachePath);
     data = JSON.parse(data.toString('utf8'));
 
-    await RequestHelper.request('post', session.host + '/api/' + session.project + '/' + session.environment + '/' + category + '/' + id + '?token=' + session.token, data);
+    await resourceRequest('post', category, id, data);
     
     await FileHelper.remove(cachePath);
 }
@@ -510,7 +523,7 @@ class HashBrown {
             process.exit(0);
 
         } catch(e) {
-            console.log(e.message);
+            console.log('ERROR:', e.message);
 
             process.exit(1);
         
