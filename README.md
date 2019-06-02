@@ -39,7 +39,7 @@ $ hashbrown-cli use febec265e2d80da0 live
 ```
 $ hashbrown-cli content ls
 
-0aa477d87aeca34e:live@localhost
+0aa477d87aeca34e:live@hashbrown.myserver.com
 --------------------
 Page 1                        40251e2b09366633
 Page 2                        45f1fdc3451022b4
