@@ -143,7 +143,13 @@ async function resourceRequest(method, category, id, data) {
 
     url += 'token=' + session.token;
 
-    return await RequestHelper.request(method, url, data);
+    let result = await RequestHelper.request(method, url, data);
+
+    if(typeof result === 'string') {
+        console.log(result);
+    }
+
+    return result;
 }
 
 /**
@@ -258,8 +264,6 @@ async function resourceCommand(category, args) {
             
             await resourceRequest('delete', category, args[1]);
             
-            console.log(category[0].toUpperCase() + category.slice(1) + ' "' + args[1] + '" deleted');
-
             break;
 
         default:
@@ -303,11 +307,25 @@ class HashBrown {
         columns([INDENT, 'use', 'Switch between projects and environments']);
         console.log();
         
+        console.log('connection');
+        columns([INDENT, 'edit', 'Edit a connection']);
+        columns([INDENT, 'ls', 'List all available connections']);
+        columns([INDENT, 'new', 'Create a new connection']);
+        columns([INDENT, 'rm', 'Remove a connection']);
+        console.log();
+        
         console.log('content');
         columns([INDENT, 'edit', 'Edit a content node']);
         columns([INDENT, 'ls', 'List all available content']);
         columns([INDENT, 'new', 'Create a new content node']);
         columns([INDENT, 'rm', 'Remove a content node']);
+        console.log();
+        
+        console.log('form');
+        columns([INDENT, 'edit', 'Edit a form']);
+        columns([INDENT, 'ls', 'List all available forms']);
+        columns([INDENT, 'new', 'Create a new form']);
+        columns([INDENT, 'rm', 'Remove a form']);
         console.log();
         
         console.log('schema');
@@ -360,6 +378,20 @@ class HashBrown {
      */
     static async schema(args) {
         await resourceCommand('schemas', args);
+    }
+    
+    /**
+     * Handles connection operations
+     */
+    static async connection(args) {
+        await resourceCommand('connections', args);
+    }
+    
+    /**
+     * Handles form operations
+     */
+    static async form(args) {
+        await resourceCommand('forms', args);
     }
 
     /**
