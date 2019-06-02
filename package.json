@@ -1,0 +1,26 @@
+{
+  "name": "hashbrown-cli",
+  "version": "0.1.0",
+  "description": "A command-line interface for the HashBrown CMS",
+  "main": "hashbrown-cli.js",
+  "preferGlobal": true,
+  "bin": "./hashbrown-cli.js",
+  "scripts": {
+    "test": "node hashbrown-cli.js help"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HashBrownCMS/cli.git"
+  },
+  "keywords": [
+    "hashbrown",
+    "cms",
+    "cli"
+  ],
+  "author": "Putaitu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HashBrownCMS/cli/issues"
+  },
+  "homepage": "https://github.com/HashBrownCMS/cli#readme"
+}
