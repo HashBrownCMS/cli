@@ -3,6 +3,60 @@
 ## Install from NPM
 `npm i -g hashbrown-cli`
 
+## Example workflow
+
+1. Set your preferred editor
+```
+$ hashbrown-cli set editor vim
+```
+
+2. Log in to a HashBrown instance
+```
+$ hashbrown-cli login https://hashbrown.myserver.com myuser mypass
+```
+
+3. List all projects
+```
+$ hashbrown-cli project ls
+
+hashbrown.myserver.com
+--------------------
+site1.com           0aa477d87aeca34e
+                    - live
+                    - testing
+
+site2.com           febec265e2d80da0
+                    - live
+                    - testing
+```
+
+4. Enter a project and environment
+```
+$ hashbrown-cli use febec265e2d80da0 live
+```
+
+5. List content
+```
+$ hashbrown-cli content ls
+
+0aa477d87aeca34e:live@localhost
+--------------------
+Page 1                        40251e2b09366633
+Page 2                        45f1fdc3451022b4
+Page 3                        cb3747b2a3272c90
+Page 4                        0a7724a8bed9c624
+```
+
+6. Edit content using partial id
+```
+$ hashbrown-cli content edit 0a7
+```
+
+7. Create new content
+```
+$ hashbrown-cli content new
+```
+
 ## Usage
 ```
 Usage: hashbrown-cli <command> [<args>]
